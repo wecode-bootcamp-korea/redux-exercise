@@ -1,6 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import CheckBox from "./CheckBox";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import CheckBox from './CheckBox';
+import { deleteCart } from '../store/actions';
 
 export default function CartItem({
   isChecked,
@@ -9,8 +11,16 @@ export default function CartItem({
   product_img,
   price,
   idx,
-  filterItem,
 }) {
+  const cartItems = useSelector(store => store.cartReducer);
+  const dispatch = useDispatch();
+  const filterItem = idx => {
+    const items = cartItems.filter((_, i) => {
+      return i !== idx;
+    });
+    dispatch(deleteCart(items));
+  };
+
   return (
     <Item>
       <CheckColumn>
@@ -95,5 +105,5 @@ const DeleteCircle = styled.div`
 const DeleteIcon = styled.div`
   width: 15px;
   height: 20px;
-  background-image: url("/images/deleteIcon.png");
+  background-image: url('/images/deleteIcon.png');
 `;

@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import CartItem from "../Components/CartItem";
-import CheckBox from "../Components/CheckBox";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import CartItem from '../Components/CartItem';
+import CheckBox from '../Components/CheckBox';
 
-export default function CartList({ cartItems, filterItem }) {
-  useEffect(() => {
-    console.log("CartList render");
-  });
+export default function CartList({ filterItem }) {
+  const cartItems = useSelector(store => store.cartReducer);
 
   return (
     <ListContainer>

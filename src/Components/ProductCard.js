@@ -1,20 +1,26 @@
-import React from "react";
-import styled from "styled-components";
-import CartIcon from "./CartIcon";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import CartIcon from './CartIcon';
+import { addCart } from '../store/actions';
 
-export default function ProductCard({ addToCart, item }) {
+function ProductCard({ item }) {
+  const dispatch = useDispatch();
+
   return (
     <Card>
       <Img src={item.product_img} />
       <Title>{item.product_name}</Title>
       <Price>{item.price.toLocaleString()} 원</Price>
-      <AddCartBtn onClick={() => addToCart()}>
-        <CartIcon width="16" height="16" />
+      <AddCartBtn onClick={() => dispatch(addCart(item))}>
+        <CartIcon width='16' height='16' />
         <span>장바구니 담기</span>
       </AddCartBtn>
     </Card>
   );
 }
+
+export default ProductCard;
 
 const Card = styled.div`
   width: 250px;
