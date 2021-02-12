@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import CartIcon from "./CartIcon";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import CartIcon from './CartIcon';
 
-export default function CartNoti({ itemCount }) {
+export default function CartNoti() {
+  // useSelector로 store에 접근하여 값을 가져온다
+  const items = useSelector(store => store.cartReducer);
   const history = useHistory();
+
   return (
-    <Icon onClick={() => history.push("/cart")}>
+    <Icon onClick={() => history.push('/cart')}>
       <ItemCount>
-        <span>{itemCount}</span>
+        <span>{items.length}</span>
       </ItemCount>
-      <CartIcon width="32" height="32" />
+      <CartIcon width='32' height='32' />
     </Icon>
   );
 }
